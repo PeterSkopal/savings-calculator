@@ -1,4 +1,4 @@
-# Front end for consuming Arkad-Search data
+# Savings Calculator
 
 ## Run project locally
 ```js
