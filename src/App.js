@@ -24,29 +24,10 @@ const Messages = {
 class App extends Component {
 
   state = {
-    year: undefined,
-    initialSavings: undefined,
-    interest: undefined,
-    monthlySavings: undefined
-  }
-
-  chartOptions() {
-    return {
-      scaleShowGridLines: true,
-      scaleGridLineColor: 'rgba(0,0,0,.05)',
-      scaleGridLineWidth: 1,
-      scaleShowHorizontalLines: true,
-      scaleShowVerticalLines: true,
-      bezierCurve: true,
-      bezierCurveTension: 0.4,
-      pointDot: true,
-      pointDotRadius: 4,
-      pointDotStrokeWidth: 1,
-      pointHitDetectionRadius: 20,
-      datasetStroke: true,
-      datasetStrokeWidth: 2,
-      datasetFill: true
-    }
+    year: 10,
+    initialSavings: 100,
+    interest: 7,
+    monthlySavings: 100
   }
 
   chartData() {
@@ -55,13 +36,13 @@ class App extends Component {
       datasets: [
         {
           label: 'Economical Growth',
+          data: this.calculateData(),
           fillColor: 'rgba(220,220,220,0.2)',
           strokeColor: 'rgba(220,220,220,1)',
           pointColor: 'rgba(220,220,220,1)',
           pointStrokeColor: '#fff',
           pointHighlightFill: '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data: this.calculateData(),
+          pointHighlightStroke: 'rgba(220,220,220,1)'
         }
       ]
     }
@@ -69,7 +50,7 @@ class App extends Component {
 
   getYears() {
     const currentYear = moment().year();
-    const years = this.state.year ? this.state.year : 0;
+    const years = this.state.year === '' ? 0 : parseInt(this.state.year, 10);
     return _.range(currentYear, currentYear + years);
   }
 
@@ -83,9 +64,12 @@ class App extends Component {
   calculateData() {
     if (this.allDefined()) {
       var growth = [];
-      growth.push( this.state.initialSavings + this.state.monthlySavings * 12 )
+      const savings = this.state.initialSavings === '' ? 0 : parseFloat(this.state.initialSavings, 10);
+      const interest = this.state.interest === '' ? 0 : parseFloat(this.state.interest, 10);
+      const monthlySavings = this.state.monthlySavings === '' ? 0 : parseFloat(this.state.monthlySavings, 10);
+      growth.push( savings + this.state.monthlySavings * 12 )
       for (var i = 1; i < this.state.year; i++) {
-        growth.push(parseInt((1 + (this.state.interest / 100)) * (growth[i-1]+this.state.monthlySavings*12), 10))
+        growth.push(parseInt((1 + (interest / 100)) * (growth[i-1]+monthlySavings*12), 10))
       }
       return growth;
     } else {
@@ -102,7 +86,7 @@ class App extends Component {
             <input type="number"
               placeholder="Initial Savings Capital"
               value={this.state.initialSavings}
-              onChange={event => this.setState({initialSavings: parseFloat(event.target.value, 10)})}
+              onChange={event => this.setState({initialSavings: event.target.value})}
             />
           </div>
           <div className="input-field">
@@ -110,7 +94,7 @@ class App extends Component {
             <input type="number"
               placeholder="Interest in %"
               value={this.state.interest}
-              onChange={event => this.setState({interest: parseFloat(event.target.value, 10)})}
+              onChange={event => this.setState({interest: event.target.value})}
             />
           </div>
           <div className="input-field">
@@ -118,7 +102,7 @@ class App extends Component {
             <input type="number"
               placeholder="Monthly Savings"
               value={this.state.monthlySavings}
-              onChange={event => this.setState({monthlySavings: parseFloat(event.target.value, 10)})}
+              onChange={event => this.setState({monthlySavings: event.target.value})}
             />
           </div>
           <div className="input-field">
@@ -126,13 +110,12 @@ class App extends Component {
             <input type="number"
               placeholder="Years"
               value={this.state.year}
-              onChange={event => this.setState({year: parseFloat(event.target.value, 10)})}
+              onChange={event => this.setState({year: event.target.value})}
             />
           </div>
         </div>
         <div className="graph-container">
-          <LineChart data={this.chartData()}
-            options={this.chartOptions()} width="600" height="250"/>
+          <LineChart data={this.chartData()} width="600" height="250" redraw/>
         </div>
       </div>
     );
