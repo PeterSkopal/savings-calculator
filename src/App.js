@@ -31,15 +31,26 @@ class App extends Component {
   }
 
   chartData() {
+    const data = this.calculateData();
     return {
       labels: this.getYears(),
       datasets: [
         {
           label: 'Economical Growth',
-          data: this.calculateData(),
-          fillColor: 'rgba(220,220,220,0.2)',
-          strokeColor: 'rgba(220,220,220,1)',
-          pointColor: 'rgba(220,220,220,1)',
+          data: data.economicalGrowth,
+          fillColor: 'rgba(244,179,23,0.2)',
+          strokeColor: 'rgba(244,179,23,1)',
+          pointColor: 'rgba(244,179,23,1)',
+          pointStrokeColor: '#fff',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(220,220,220,1)'
+        },
+        {
+          label: 'Bank Growth',
+          data: data.bankGrowth,
+          fillColor: 'rgba(50,154,85,0.2)',
+          strokeColor: 'rgba(50,154,85,1)',
+          pointColor: 'rgba(50,154,85,1)',
           pointStrokeColor: '#fff',
           pointHighlightFill: '#fff',
           pointHighlightStroke: 'rgba(220,220,220,1)'
@@ -47,33 +58,35 @@ class App extends Component {
       ]
     }
   }
-
+  
   getYears() {
     const currentYear = moment().year();
     const years = this.state.year === '' ? 0 : parseInt(this.state.year, 10);
     return _.range(currentYear, currentYear + years);
   }
-
+  
   allDefined() {
     return (this.state.initialSavings !== undefined)
-      && (this.state.interest !== undefined)
-      && (this.state.monthlySavings !== undefined)
-      && (this.state.year !== undefined);
+    && (this.state.interest !== undefined)
+    && (this.state.monthlySavings !== undefined)
+    && (this.state.year !== undefined);
   }
-
+  
   calculateData() {
+    const data = { economicalGrowth: [], bankGrowth: [] };
     if (this.allDefined()) {
-      var growth = [];
       const savings = this.state.initialSavings === '' ? 0 : parseFloat(this.state.initialSavings, 10);
       const interest = this.state.interest === '' ? 0 : parseFloat(this.state.interest, 10);
       const monthlySavings = this.state.monthlySavings === '' ? 0 : parseFloat(this.state.monthlySavings, 10);
-      growth.push( savings + this.state.monthlySavings * 12 )
+      data.economicalGrowth.push( savings + this.state.monthlySavings * 12 )
+      data.bankGrowth.push( savings + this.state.monthlySavings * 12 )
       for (var i = 1; i < this.state.year; i++) {
-        growth.push(parseInt((1 + (interest / 100)) * (growth[i-1]+monthlySavings*12), 10))
+        data.economicalGrowth.push(parseInt((1 + (interest / 100)) * (data.economicalGrowth[i-1]+monthlySavings*12), 10))
+        data.bankGrowth.push(parseInt(1.01 * (data.bankGrowth[i-1]+monthlySavings*12), 10))
       }
-      return growth;
+      return data;
     } else {
-      return [];
+      return data;
     }
   }
 
