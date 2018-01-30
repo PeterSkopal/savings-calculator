@@ -35,11 +35,13 @@
 }
 
 .input-field {
-  width: 350px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  width: 300px;
+  max-width: 100%;
 }
 
 input {

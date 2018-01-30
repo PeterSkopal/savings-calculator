@@ -5,20 +5,16 @@ import _ from 'underscore';
 var LineChart = require("react-chartjs").Line;
 
 const DefaultMessages = {
-  SavingQuestion: 'Do you want to know how much you can save in 10, 25 or 50 years?',
-  InitialSavings: 'What is your initial savings capital?',
-  MonthlySavings: 'How much will you invest each month?',
-  IncomeQuery: 'What is your income?',
-  InterestQuery: 'How much yield are you expecting each year?',
-  AmountOfYears: 'How many years would you like to save?'
+  InitialSavings: 'Initial Savings',
+  InterestQuery: 'Interest Expectation',
+  MonthlySavings: 'Montly Investments',
+  AmountOfYears: 'Years to Save'
 }
 const Messages = {
-  SavingQuestion: document.currentScript.getAttribute('SavingQuestion') || DefaultMessages.SavingQuestion,
   InitialSavings: document.currentScript.getAttribute('InitialSavings') || DefaultMessages.InitialSavings,
-  MonthlySavings: document.currentScript.getAttribute('MonthlySavings') || DefaultMessages.MonthlySavings,
-  IncomeQuery: document.currentScript.getAttribute('IncomeQuery') || DefaultMessages.IncomeQuery,
   InterestQuery: document.currentScript.getAttribute('InterestQuery') || DefaultMessages.InterestQuery,
-  AmountOfYears: document.currentScript.getAttribute('AmountOfYears') || DefaultMessages.AmountOfYears,
+  MonthlySavings: document.currentScript.getAttribute('MonthlySavings') || DefaultMessages.MonthlySavings,
+  AmountOfYears: document.currentScript.getAttribute('AmountOfYears') || DefaultMessages.AmountOfYears
 }
 
 class App extends Component {
@@ -94,7 +90,7 @@ class App extends Component {
       <div className="App">
         <div className="input-container">
           <div className="input-field">
-            <label>Initial Savings Capital</label>
+            <label>{Messages.InitialSavings}</label>
             <input type="number"
               placeholder="Initial Savings Capital"
               value={this.state.initialSavings}
@@ -102,7 +98,7 @@ class App extends Component {
             />
           </div>
           <div className="input-field">
-            <label>Interest in %</label>          
+            <label>{Messages.InterestQuery}</label>          
             <input type="number"
               placeholder="Interest in %"
               value={this.state.interest}
@@ -110,7 +106,7 @@ class App extends Component {
             />
           </div>
           <div className="input-field">
-            <label>Montly Savings</label>          
+            <label>{Messages.MonthlySavings}</label>          
             <input type="number"
               placeholder="Monthly Savings"
               value={this.state.monthlySavings}
@@ -118,7 +114,7 @@ class App extends Component {
             />
           </div>
           <div className="input-field">
-            <label>Years to Save</label>          
+            <label>{Messages.AmountOfYears}</label>          
             <input type="number"
               placeholder="Years"
               value={this.state.year}
