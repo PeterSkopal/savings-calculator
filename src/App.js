@@ -85,10 +85,8 @@ class App extends Component {
         data.economicalGrowth.push(Math.round(((1 + (interest / 100)) * (data.economicalGrowth[i-1]+monthlySavings*12)) / 10) * 10)
         data.bankGrowth.push(Math.round((1.01 * (data.bankGrowth[i-1]+monthlySavings*12)) / 10) * 10)
       }
-      return data;
-    } else {
-      return data;
     }
+    return data;
   }
 
   render() {
