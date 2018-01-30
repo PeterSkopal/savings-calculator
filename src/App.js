@@ -80,9 +80,10 @@ class App extends Component {
       const monthlySavings = this.state.monthlySavings === '' ? 0 : parseFloat(this.state.monthlySavings, 10);
       data.economicalGrowth.push( savings + this.state.monthlySavings * 12 )
       data.bankGrowth.push( savings + this.state.monthlySavings * 12 )
+      
       for (var i = 1; i < this.state.year; i++) {
-        data.economicalGrowth.push(parseInt((1 + (interest / 100)) * (data.economicalGrowth[i-1]+monthlySavings*12), 10))
-        data.bankGrowth.push(parseInt(1.01 * (data.bankGrowth[i-1]+monthlySavings*12), 10))
+        data.economicalGrowth.push(Math.round(((1 + (interest / 100)) * (data.economicalGrowth[i-1]+monthlySavings*12)) / 10) * 10)
+        data.bankGrowth.push(Math.round((1.01 * (data.bankGrowth[i-1]+monthlySavings*12)) / 10) * 10)
       }
       return data;
     } else {
