@@ -8,13 +8,16 @@ const DefaultMessages = {
   InitialSavings: 'Initial Savings',
   InterestQuery: 'Interest Expectation',
   MonthlySavings: 'Montly Investments',
-  AmountOfYears: 'Years to Save'
+  AmountOfYears: 'Years to Save',
+  BankComparison: 'Compare to Bank Saving'
 }
+const script = document.currentScript;
 const Messages = {
-  InitialSavings: document.currentScript.getAttribute('InitialSavings') || DefaultMessages.InitialSavings,
-  InterestQuery: document.currentScript.getAttribute('InterestQuery') || DefaultMessages.InterestQuery,
-  MonthlySavings: document.currentScript.getAttribute('MonthlySavings') || DefaultMessages.MonthlySavings,
-  AmountOfYears: document.currentScript.getAttribute('AmountOfYears') || DefaultMessages.AmountOfYears
+  InitialSavings: script && script.hasAttribute('InitialSavings') ? script.getAttribute('InitialSavings') : DefaultMessages.InitialSavings,
+  InterestQuery: script && script.hasAttribute('InterestQuery') ? script.getAttribute('InterestQuery') : DefaultMessages.InterestQuery,
+  MonthlySavings: script && script.hasAttribute('MonthlySavings') ? script.getAttribute('MonthlySavings') : DefaultMessages.MonthlySavings,
+  AmountOfYears: script && script.hasAttribute('AmountOfYears') ? script.getAttribute('AmountOfYears') : DefaultMessages.AmountOfYears,
+  BankComparison: script && script.hasAttribute('BankComparison') ? script.getAttribute('BankComparison') : DefaultMessages.BankComparison
 }
 
 class App extends Component {
@@ -44,7 +47,7 @@ class App extends Component {
       }]
     }
   }
-  
+
   getYears() {
     const currentYear = moment().year();
     const years = this.state.year === '' ? 0 : parseInt(this.state.year, 10);
