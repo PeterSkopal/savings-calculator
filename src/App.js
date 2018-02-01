@@ -96,15 +96,6 @@ class App extends Component {
             />
           </div>
           <div className="input-field">
-            <label>{Messages.InterestQuery}</label>          
-            <input className="small-input" type="number"
-              placeholder="Interest in %"
-              value={this.state.interest}
-              onChange={event => this.setState({interest: event.target.value})}
-            />
-            <i className="fa fa-percent icon"></i>
-          </div>
-          <div className="input-field">
             <label>{Messages.MonthlySavings}</label>          
             <input type="number"
               placeholder="Monthly Savings"
@@ -119,6 +110,15 @@ class App extends Component {
               value={this.state.year}
               onChange={event => this.setState({year: event.target.value})}
             />
+          </div>
+          <div className="input-field">
+            <label>{Messages.InterestQuery}</label>          
+            <input className="small-input" type="number"
+              placeholder="Interest in %"
+              value={this.state.interest}
+              onChange={event => this.setState({interest: event.target.value})}
+            />
+            <i className="fa fa-percent icon"></i>
           </div>
           <div className="checkbox-field">
             <label>{Messages.BankComparison}</label>          
