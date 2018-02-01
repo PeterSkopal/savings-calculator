@@ -28,31 +28,21 @@ class App extends Component {
 
   chartData() {
     const data = this.calculateData();
-    return {
-      labels: this.getYears(),
-      datasets: [
-        {
-          label: 'Economical Growth',
-          data: data.economicalGrowth,
-          fillColor: 'rgba(244,179,23,0.2)',
-          strokeColor: 'rgba(244,179,23,1)',
-          pointColor: 'rgba(244,179,23,1)',
-          pointStrokeColor: '#fff',
-          pointHighlightFill: '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)'
-        },
-        {
-          label: 'Bank Growth',
-          data: data.bankGrowth,
-          fillColor: 'rgba(50,154,85,0.2)',
-          strokeColor: 'rgba(50,154,85,1)',
-          pointColor: 'rgba(50,154,85,1)',
-          pointStrokeColor: '#fff',
-          pointHighlightFill: '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)'
-        }
-      ]
-    }
+    return {
+      labels: this.getYears(),
+      datasets: [{
+        label: 'Economical Growth',
+        data: data.economicalGrowth,
+        backgroundColor: 'rgba(244,179,23,0.2)',
+        borderColor: 'rgba(244,179,23,1)'
+      },
+      {
+        label: 'Bank Growth',
+        data: data.bankGrowth,
+        backgroundColor: 'rgba(50,154,85,0.2)',
+        borderColor: 'rgba(50,154,85,1)'
+      }]
+    }
   }
   
   getYears() {
