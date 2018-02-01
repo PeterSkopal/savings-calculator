@@ -2,31 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .input-container {
   display: flex;
   flex-direction: column;
@@ -40,7 +15,21 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  width: 300px;
+  width: 330px;
+  max-width: 100%;
+}
+
+.small-input-field {
+  width: 50px;
+}
+
+.checkbox-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 330px;
   max-width: 100%;
 }
 

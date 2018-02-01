@@ -26,26 +26,31 @@ class App extends Component {
     year: 10,
     initialSavings: 100,
     interest: 7,
-    monthlySavings: 100
+    monthlySavings: 100,
+    bankComparison: false,
+    bankInterest: 0.5
   }
 
   chartData() {
     const data = this.calculateData();
-    return {
+    const chartData = {
       labels: this.getYears(),
       datasets: [{
         label: 'Economical Growth',
         data: data.economicalGrowth,
         backgroundColor: 'rgba(244,179,23,0.2)',
         borderColor: 'rgba(244,179,23,1)'
-      },
-      {
+      }]
+    };
+    if (this.state.bankComparison) {
+      chartData.datasets.push({
         label: 'Bank Growth',
         data: data.bankGrowth,
         backgroundColor: 'rgba(50,154,85,0.2)',
         borderColor: 'rgba(50,154,85,1)'
-      }]
+      });
     }
+    return chartData;
   }
 
   getYears() {
@@ -67,12 +72,12 @@ class App extends Component {
       const savings = this.state.initialSavings === '' ? 0 : parseFloat(this.state.initialSavings, 10);
       const interest = this.state.interest === '' ? 0 : parseFloat(this.state.interest, 10);
       const monthlySavings = this.state.monthlySavings === '' ? 0 : parseFloat(this.state.monthlySavings, 10);
+      const bankInterest = this.state.bankInterest === '' ? 0 : parseFloat(this.state.bankInterest, 10);
       data.economicalGrowth.push( savings + this.state.monthlySavings * 12 )
-      data.bankGrowth.push( savings + this.state.monthlySavings * 12 )
-      
+      if (this.state.bankComparison) data.bankGrowth.push( savings + this.state.monthlySavings * 12 )
       for (var i = 1; i < this.state.year; i++) {
         data.economicalGrowth.push(Math.round(((1 + (interest / 100)) * (data.economicalGrowth[i-1]+monthlySavings*12)) / 10) * 10)
-        data.bankGrowth.push(Math.round((1.01 * (data.bankGrowth[i-1]+monthlySavings*12)) / 10) * 10)
+        if (this.state.bankComparison) data.bankGrowth.push(Math.round(( (1+bankInterest/100) * (data.bankGrowth[i-1]+monthlySavings*12)) / 10) * 10)
       }
     }
     return data;
@@ -114,9 +119,21 @@ class App extends Component {
               onChange={event => this.setState({year: event.target.value})}
             />
           </div>
+          <div className="checkbox-field">
+            <label>{Messages.BankComparison}</label>          
+            <input type="checkbox"
+              value={this.state.bankComparison}
+              onChange={event => this.setState({bankComparison: event.target.checked})}
+            />
+            <input className="small-input-field" type="number"
+              placeholder="Bank Interest"
+              value={this.state.bankInterest}
+              onChange={event => this.setState({bankInterest: event.target.value})}
+            />
+          </div>
         </div>
         <div className="graph-container">
-          <Line data={this.chartData()} />
+          <Line data={this.chartData()} height={250}/>
         </div>
       </div>
     );
