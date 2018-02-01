@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import moment from 'moment';
 import _ from 'underscore';
-var LineChart = require("react-chartjs").Line;
+import { Line } from 'react-chartjs-2';
 
 const DefaultMessages = {
   InitialSavings: 'Initial Savings',
@@ -123,7 +123,7 @@ class App extends Component {
           </div>
         </div>
         <div className="graph-container">
-          <LineChart data={this.chartData()} width="600" height="250" redraw/>
+          <Line data={this.chartData()} />
         </div>
       </div>
     );
