@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import moment from 'moment';
 import _ from 'underscore';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 const DefaultMessages = {
   InitialSavings: 'Initial Savings',
   InterestQuery: 'Interest Expectation',
   MonthlySavings: 'Montly Investments',
   AmountOfYears: 'Years to Save',
-  BankComparison: 'Compare to Bank Saving'
+  BankComparison: 'Compare to Bank Saving',
+  StopProfit: 'Stop Saving When Profit/Month is'
 }
 const script = document.currentScript;
 const Messages = {
@@ -17,18 +18,21 @@ const Messages = {
   InterestQuery: script && script.hasAttribute('InterestQuery') ? script.getAttribute('InterestQuery') : DefaultMessages.InterestQuery,
   MonthlySavings: script && script.hasAttribute('MonthlySavings') ? script.getAttribute('MonthlySavings') : DefaultMessages.MonthlySavings,
   AmountOfYears: script && script.hasAttribute('AmountOfYears') ? script.getAttribute('AmountOfYears') : DefaultMessages.AmountOfYears,
-  BankComparison: script && script.hasAttribute('BankComparison') ? script.getAttribute('BankComparison') : DefaultMessages.BankComparison
+  BankComparison: script && script.hasAttribute('BankComparison') ? script.getAttribute('BankComparison') : DefaultMessages.BankComparison,
+  StopProfit: script && script.hasAttribute('StopProfit') ? script.getAttribute('StopProfit') : DefaultMessages.StopProfit
 }
 
 class App extends Component {
 
   state = {
     year: 10,
-    initialSavings: 100,
+    initialSavings: 1000,
     interest: 7,
-    monthlySavings: 100,
+    monthlySavings: 2500,
     bankComparison: false,
-    bankInterest: 0.5
+    bankInterest: 0.5,
+    givesProfit: false,
+    whenProfitIsPerMonth: 1000,
   }
 
   chartData() {
@@ -37,17 +41,28 @@ class App extends Component {
       labels: this.getYears(),
       datasets: [{
         label: 'Economical Growth',
+        type: 'line',
         data: data.economicalGrowth,
-        backgroundColor: 'rgba(244,179,23,0.2)',
+        backgroundColor: 'rgba(244,179,23,0)',
         borderColor: 'rgba(244,179,23,1)'
       }]
     };
     if (this.state.bankComparison) {
       chartData.datasets.push({
         label: 'Bank Growth',
+        type: 'line',
         data: data.bankGrowth,
-        backgroundColor: 'rgba(50,154,85,0.2)',
+        backgroundColor: 'rgba(50,154,85,0)',
         borderColor: 'rgba(50,154,85,1)'
+      });
+    }
+    if (this.state.givesProfit) {
+      chartData.datasets.push({
+        label: 'Profit',
+        type: 'bar',
+        data: data.profit,
+        backgroundColor: 'rgba(170,221,255,0.8)',
+        borderColor: 'rgba(170,221,255,1)'
       });
     }
     return chartData;
@@ -67,17 +82,42 @@ class App extends Component {
   }
   
   calculateData() {
-    const data = { economicalGrowth: [], bankGrowth: [] };
+    const data = { economicalGrowth: [], bankGrowth: [], profit: [] };
     if (this.allDefined()) {
       const savings = this.state.initialSavings === '' ? 0 : parseFloat(this.state.initialSavings, 10);
       const interest = this.state.interest === '' ? 0 : parseFloat(this.state.interest, 10);
       const monthlySavings = this.state.monthlySavings === '' ? 0 : parseFloat(this.state.monthlySavings, 10);
       const bankInterest = this.state.bankInterest === '' ? 0 : parseFloat(this.state.bankInterest, 10);
+      const profit = this.state.whenProfitIsPerMonth === '' ? 0 : parseFloat(this.state.whenProfitIsPerMonth, 10);
+      
       data.economicalGrowth.push( savings + this.state.monthlySavings * 12 )
-      if (this.state.bankComparison) data.bankGrowth.push( savings + this.state.monthlySavings * 12 )
+      
+      if (this.state.bankComparison) {
+        data.bankGrowth.push( savings + this.state.monthlySavings * 12 )
+      }
+      if (this.state.givesProfit) {
+        data.profit.push(0);
+      }
+      
       for (var i = 1; i < this.state.year; i++) {
-        data.economicalGrowth.push(Math.round(((1 + (interest / 100)) * (data.economicalGrowth[i-1]+monthlySavings*12)) / 10) * 10)
-        if (this.state.bankComparison) data.bankGrowth.push(Math.round(( (1+bankInterest/100) * (data.bankGrowth[i-1]+monthlySavings*12)) / 10) * 10)
+        const currentYearProfit = data.economicalGrowth[i - 1] * (interest / 100);
+        const currentYearBankProfit = data.bankGrowth[i - 1] * (bankInterest / 100);
+        const stopSaving = currentYearProfit > (profit * 12);
+        const stopBankSaving = currentYearBankProfit > (profit * 12);
+        
+        if (this.state.givesProfit && stopSaving) {
+          data.profit.push(Math.round(currentYearProfit / 10) * 10);
+          data.economicalGrowth.push(data.economicalGrowth[i - 1]);
+          
+        } else {
+          data.profit.push(0);
+          data.economicalGrowth.push(Math.round(((1 + (interest / 100)) * (data.economicalGrowth[i-1]+monthlySavings*12)) / 10) * 10);
+        }
+        if (this.state.bankComparison && this.state.givesProfit && stopBankSaving) {
+          data.bankGrowth.push(data.bankGrowth[i - 1]);
+        } else {
+          data.bankGrowth.push(Math.round(((1 + bankInterest / 100) * (data.bankGrowth[i-1]+monthlySavings*12)) / 10) * 10);
+        }
       }
     }
     return data;
@@ -133,9 +173,21 @@ class App extends Component {
             />
             <i className="fa fa-percent icon"></i>
           </div>
+          <div className="checkbox-field">
+            <label>{Messages.StopProfit}</label>          
+            <input type="checkbox"
+              value={this.state.givesProfit}
+              onChange={event => this.setState({givesProfit: event.target.checked})}
+            />
+            <input className="small-input" type="number"
+              placeholder="Bank Interest"
+              value={this.state.whenProfitIsPerMonth}
+              onChange={event => this.setState({whenProfitIsPerMonth: event.target.value})}
+            />
+          </div>
         </div>
         <div className="graph-container">
-          <Line data={this.chartData()} height={250}/>
+          <Bar data={this.chartData()} height={250}/>
         </div>
       </div>
     );
