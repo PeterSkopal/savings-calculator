@@ -3,6 +3,8 @@ import './App.css';
 import moment from 'moment';
 import _ from 'underscore';
 import { Bar } from 'react-chartjs-2';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Toggle from 'material-ui/Toggle';
 
 const DefaultMessages = {
   InitialSavings: 'Initial Savings',
@@ -10,7 +12,7 @@ const DefaultMessages = {
   MonthlySavings: 'Montly Investments',
   AmountOfYears: 'Years to Save',
   BankComparison: 'Compare to Bank Saving',
-  StopProfit: 'Stop Saving When Profit/Month is'
+  StopProfit: 'Stop When Profit/Month is'
 }
 const script = document.currentScript;
 const Messages = {
@@ -21,6 +23,11 @@ const Messages = {
   BankComparison: script && script.hasAttribute('BankComparison') ? script.getAttribute('BankComparison') : DefaultMessages.BankComparison,
   StopProfit: script && script.hasAttribute('StopProfit') ? script.getAttribute('StopProfit') : DefaultMessages.StopProfit
 }
+const styles = {
+  block: {
+    width: 60,
+  }
+};
 
 class App extends Component {
 
@@ -161,11 +168,14 @@ class App extends Component {
             <i className="fa fa-percent icon"></i>
           </div>
           <div className="checkbox-field">
-            <label>{Messages.BankComparison}</label>          
-            <input type="checkbox"
-              value={this.state.bankComparison}
-              onChange={event => this.setState({bankComparison: event.target.checked})}
-            />
+            <div className="checkbox">
+              <MuiThemeProvider>
+                <Toggle style={styles.block}
+                  onToggle={(event, isInputChecked) => this.setState({bankComparison: isInputChecked})}
+                />
+              </MuiThemeProvider>
+              <label>{Messages.BankComparison}</label>
+            </div>
             <input className="small-input" type="number"
               placeholder="Bank Interest"
               value={this.state.bankInterest}
@@ -174,11 +184,14 @@ class App extends Component {
             <i className="fa fa-percent icon"></i>
           </div>
           <div className="checkbox-field">
-            <label>{Messages.StopProfit}</label>          
-            <input type="checkbox"
-              value={this.state.givesProfit}
-              onChange={event => this.setState({givesProfit: event.target.checked})}
-            />
+            <div className="checkbox">
+              <MuiThemeProvider>
+                <Toggle style={styles.block}
+                  onToggle={(event, isInputChecked) => this.setState({givesProfit: isInputChecked})}
+                  />
+              </MuiThemeProvider>
+              <label>{Messages.StopProfit}</label>          
+            </div>
             <input className="small-input" type="number"
               placeholder="Bank Interest"
               value={this.state.whenProfitIsPerMonth}
