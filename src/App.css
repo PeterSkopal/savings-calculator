@@ -10,6 +10,7 @@ label {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: rgba(0,0,0,0.6);
   text-shadow: 1px 2px 4px rgba(0,0,0,0.13);
+  line-height: 25px;
 }
 
 .input-container {
@@ -26,8 +27,8 @@ label {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  width: 330px;
-  max-width: 330px;
+  width: 360px;
+  max-width: 360px;
   margin-right: 10px;
   margin-left: 10px;
 }
@@ -39,8 +40,8 @@ label {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  width: 330px;
-  max-width: 330px;
+  width: 360px;
+  max-width: 360px;
   margin-right: 10px;
   margin-left: 10px;
 }
@@ -65,7 +66,7 @@ input[type=number] {
 }
 
 .small-input {
-  width: 50px;
+  width: 90px;
 }
 
 a:focus,
@@ -77,14 +78,9 @@ textarea:focus {
 
 .icon {
   position: absolute;
-  right: 13px;
+  right: 25px;
   opacity: 0.2;
   font-size: 15px;
-  /* Center in Safari */
-  margin-top: auto;
-  margin-bottom: auto;
-  top:0;
-  bottom:0;
 }
 
 .graph-container {
