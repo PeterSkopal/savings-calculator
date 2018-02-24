@@ -26,7 +26,19 @@ const Messages = {
 const styles = {
   block: {
     width: 60,
-  }
+  },
+  thumbOff: {
+    backgroundColor: '#a8a8a8',
+  },
+  trackOff: {
+    backgroundColor: 'rgba(1,1,1,0.4)',
+  },
+  thumbSwitched: {
+    backgroundColor: 'rgba(50,154,85,1)',
+  },
+  trackSwitched: {
+    backgroundColor: 'rgba(1,1,1,0.4)',
+  },
 };
 
 class App extends Component {
@@ -172,6 +184,10 @@ class App extends Component {
               <MuiThemeProvider>
                 <Toggle style={styles.block}
                   onToggle={(event, isInputChecked) => this.setState({bankComparison: isInputChecked})}
+                  thumbStyle={styles.thumbOff}
+                  trackStyle={styles.trackOff}
+                  thumbSwitchedStyle={styles.thumbSwitched}
+                  trackSwitchedStyle={styles.trackSwitched}
                 />
               </MuiThemeProvider>
               <label>{Messages.BankComparison}</label>
@@ -188,7 +204,11 @@ class App extends Component {
               <MuiThemeProvider>
                 <Toggle style={styles.block}
                   onToggle={(event, isInputChecked) => this.setState({givesProfit: isInputChecked})}
-                  />
+                  thumbStyle={styles.thumbOff}
+                  trackStyle={styles.trackOff}
+                  thumbSwitchedStyle={styles.thumbSwitched}
+                  trackSwitchedStyle={styles.trackSwitched}
+                />
               </MuiThemeProvider>
               <label>{Messages.StopProfit}</label>          
             </div>
