@@ -1,0 +1,50 @@
+{
+    "AmountOfYears": {
+        "en": "Years to Save",
+        "sv": "År att Spara"
+    },
+    "BankComparison": {
+        "en": "Compare to Bank Saving",
+        "sv": "Jämför med Banksparande"
+    },
+    "BankGrowth": {
+        "en": "Bank Growth",
+        "sv": "Bank Tillväxt"
+    },
+    "EconomicalGrowth": {
+        "en": "Economical Growth",
+        "sv": "Ekonomisk Tillväxt"
+    },
+    "Interest": {
+        "en": "Interest",
+        "sv": "Ränta"
+    },
+    "InterestQuery": {
+        "en": "Interest Expectation",
+        "sv": "Förväntad Ränta"
+    },
+    "MonthlySavings": {
+        "en": "Monthly Investments",
+        "sv": "Månatliga Investeringar"
+    },
+    "Profit": {
+        "en": "Profit",
+        "sv": "Vinst"
+    },
+    "ProfitMonth": {
+        "en": "Profit/Month",
+        "sv": "Vinst/Månad"
+    },
+    "Savings": {
+        "en": "Initial Savings",
+        "sv": "Sparkapital"
+    },
+    "StopProfit": {
+        "en": "Stop When Profit/Month is",
+        "sv": "Sluta när Vinst/Månad är"
+    },
+    "Years": {
+        "en": "Years",
+        "sv": "År"    
+    }
+}

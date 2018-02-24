@@ -1,28 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
+import Messages from './language.json';
 import moment from 'moment';
 import _ from 'underscore';
 import { Bar } from 'react-chartjs-2';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Toggle from 'material-ui/Toggle';
 
-const DefaultMessages = {
-  InitialSavings: 'Initial Savings',
-  InterestQuery: 'Interest Expectation',
-  MonthlySavings: 'Montly Investments',
-  AmountOfYears: 'Years to Save',
-  BankComparison: 'Compare to Bank Saving',
-  StopProfit: 'Stop When Profit/Month is'
-}
 const script = document.currentScript;
-const Messages = {
-  InitialSavings: script && script.hasAttribute('InitialSavings') ? script.getAttribute('InitialSavings') : DefaultMessages.InitialSavings,
-  InterestQuery: script && script.hasAttribute('InterestQuery') ? script.getAttribute('InterestQuery') : DefaultMessages.InterestQuery,
-  MonthlySavings: script && script.hasAttribute('MonthlySavings') ? script.getAttribute('MonthlySavings') : DefaultMessages.MonthlySavings,
-  AmountOfYears: script && script.hasAttribute('AmountOfYears') ? script.getAttribute('AmountOfYears') : DefaultMessages.AmountOfYears,
-  BankComparison: script && script.hasAttribute('BankComparison') ? script.getAttribute('BankComparison') : DefaultMessages.BankComparison,
-  StopProfit: script && script.hasAttribute('StopProfit') ? script.getAttribute('StopProfit') : DefaultMessages.StopProfit
-}
+const lang = script && script.hasAttribute('language') ? script.getAttribute('language') : 'en';
+
 const styles = {
   block: {
     width: 60,
@@ -59,7 +46,7 @@ class App extends Component {
     const chartData = {
       labels: this.getYears(),
       datasets: [{
-        label: 'Economical Growth',
+        label: Messages.EconomicalGrowth[lang],
         type: 'line',
         data: data.economicalGrowth,
         backgroundColor: 'rgba(244,179,23,0)',
@@ -68,7 +55,7 @@ class App extends Component {
     };
     if (this.state.bankComparison) {
       chartData.datasets.push({
-        label: 'Bank Growth',
+        label: Messages.BankGrowth[lang],
         type: 'line',
         data: data.bankGrowth,
         backgroundColor: 'rgba(50,154,85,0)',
@@ -77,7 +64,7 @@ class App extends Component {
     }
     if (this.state.givesProfit) {
       chartData.datasets.push({
-        label: 'Profit',
+        label: Messages.Profit[lang],
         type: 'bar',
         data: data.profit,
         backgroundColor: 'rgba(170,221,255,0.8)',
@@ -147,33 +134,33 @@ class App extends Component {
       <div className="App">
         <div className="input-container">
           <div className="input-field">
-            <label>{Messages.InitialSavings}</label>
+            <label>{Messages.Savings[lang]}</label>
             <input type="number"
-              placeholder="Savings"
+              placeholder={Messages.Savings[lang]}
               value={this.state.initialSavings}
               onChange={event => this.setState({initialSavings: event.target.value})}
             />
           </div>
           <div className="input-field">
-            <label>{Messages.MonthlySavings}</label>          
+            <label>{Messages.MonthlySavings[lang]}</label>          
             <input type="number"
-              placeholder="Monthly Savings"
+              placeholder={Messages.MonthlySavings[lang]}
               value={this.state.monthlySavings}
               onChange={event => this.setState({monthlySavings: event.target.value})}
             />
           </div>
           <div className="input-field">
-            <label>{Messages.AmountOfYears}</label>          
+            <label>{Messages.AmountOfYears[lang]}</label>          
             <input className="small-input" type="number"
-              placeholder="Years"
+              placeholder={Messages.Years[lang]}
               value={this.state.year}
               onChange={event => this.setState({year: event.target.value})}
             />
           </div>
           <div className="input-field">
-            <label>{Messages.InterestQuery}</label>          
+            <label>{Messages.InterestQuery[lang]}</label>          
             <input className="small-input" type="number"
-              placeholder="Interest"
+              placeholder={Messages.Interest[lang]}
               value={this.state.interest}
               onChange={event => this.setState({interest: event.target.value})}
             />
@@ -190,10 +177,10 @@ class App extends Component {
                   trackSwitchedStyle={styles.trackSwitched}
                 />
               </MuiThemeProvider>
-              <label>{Messages.BankComparison}</label>
+              <label>{Messages.BankComparison[lang]}</label>
             </div>
             <input className="small-input" type="number"
-              placeholder="Interest"
+              placeholder={Messages.Interest[lang]}
               value={this.state.bankInterest}
               onChange={event => this.setState({bankInterest: event.target.value})}
             />
@@ -210,10 +197,10 @@ class App extends Component {
                   trackSwitchedStyle={styles.trackSwitched}
                 />
               </MuiThemeProvider>
-              <label>{Messages.StopProfit}</label>          
+              <label>{Messages.StopProfit[lang]}</label>          
             </div>
             <input className="small-input" type="number"
-              placeholder="Profit/Month"
+              placeholder={Messages.ProfitMonth[lang]}
               value={this.state.whenProfitIsPerMonth}
               onChange={event => this.setState({whenProfitIsPerMonth: event.target.value})}
             />

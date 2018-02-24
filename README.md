@@ -27,6 +27,11 @@ Place this in bottom of html body
 <script
     src="<link-to-your-static-js>"
     mountNode="<id-of-dom-node-to-mount-on>"
+    language="<language (en/sv)>"
 ></script>
-<!-- default mountNode value: savings-calculator -->
+<!-- 
+default values:
+    mountNode: 'savings-calculator'
+    language: 'en'
+-->
 ```
