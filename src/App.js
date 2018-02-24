@@ -149,7 +149,7 @@ class App extends Component {
           <div className="input-field">
             <label>{Messages.InitialSavings}</label>
             <input type="number"
-              placeholder="Initial Savings Capital"
+              placeholder="Savings"
               value={this.state.initialSavings}
               onChange={event => this.setState({initialSavings: event.target.value})}
             />
@@ -173,7 +173,7 @@ class App extends Component {
           <div className="input-field">
             <label>{Messages.InterestQuery}</label>          
             <input className="small-input" type="number"
-              placeholder="Interest in %"
+              placeholder="Interest"
               value={this.state.interest}
               onChange={event => this.setState({interest: event.target.value})}
             />
@@ -193,7 +193,7 @@ class App extends Component {
               <label>{Messages.BankComparison}</label>
             </div>
             <input className="small-input" type="number"
-              placeholder="Bank Interest"
+              placeholder="Interest"
               value={this.state.bankInterest}
               onChange={event => this.setState({bankInterest: event.target.value})}
             />
@@ -213,7 +213,7 @@ class App extends Component {
               <label>{Messages.StopProfit}</label>          
             </div>
             <input className="small-input" type="number"
-              placeholder="Bank Interest"
+              placeholder="Profit/Month"
               value={this.state.whenProfitIsPerMonth}
               onChange={event => this.setState({whenProfitIsPerMonth: event.target.value})}
             />
