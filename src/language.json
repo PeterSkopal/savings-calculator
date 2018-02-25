@@ -1,4 +1,5 @@
 {
+    "languages": ["en", "sv"],
     "AmountOfYears": {
         "en": "Years to Save",
         "sv": "År att Spara"

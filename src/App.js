@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import './App.css';
 import Messages from './language.json';
 import moment from 'moment';
 import _ from 'underscore';
 import { Bar } from 'react-chartjs-2';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Toggle from 'material-ui/Toggle';
+import './App.css';
 
 const script = document.currentScript;
-const lang = script && script.hasAttribute('language') ? script.getAttribute('language') : 'en';
+let lang =  'en';
+if (script && script.hasAttribute('lan') && Messages.languages.includes(script.getAttribute('lan'))) {
+  lang = script.getAttribute('lan');
+}
 
 const styles = {
   block: {
