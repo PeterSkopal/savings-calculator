@@ -161,16 +161,21 @@ class App extends Component {
             />
           </div>
           <div className="input-field">
-            <label>{Messages.InterestQuery[lang]}</label>          
-            <input className="small-input" type="number"
-              placeholder={Messages.Interest[lang]}
-              value={this.state.interest}
-              onChange={event => this.setState({interest: event.target.value})}
-            />
-            <i className="fa fa-percent icon"></i>
+            <label>{Messages.InterestQuery[lang]}</label>
+            <div style={{position: 'relative', margin: 0}}>
+              <input className="small-input" type="number"
+                placeholder={Messages.Interest[lang]}
+                value={this.state.interest}
+                onChange={event => this.setState({interest: event.target.value})}
+              />
+              <i className="fa fa-percent icon"></i>
+            </div>
           </div>
           <div className="checkbox-field">
             <div className="checkbox">
+              <label>{Messages.BankComparison[lang]}</label>
+            </div>
+            <div className="slide-input" style={{position: 'relative', margin: 0}}>
               <MuiThemeProvider>
                 <Toggle style={styles.block}
                   onToggle={(event, isInputChecked) => this.setState({bankComparison: isInputChecked})}
@@ -180,17 +185,19 @@ class App extends Component {
                   trackSwitchedStyle={styles.trackSwitched}
                 />
               </MuiThemeProvider>
-              <label>{Messages.BankComparison[lang]}</label>
+              <input className="small-input" type="number"
+                placeholder={Messages.Interest[lang]}
+                value={this.state.bankInterest}
+                onChange={event => this.setState({bankInterest: event.target.value})}
+              />
+              <i className="fa fa-percent icon"></i>
             </div>
-            <input className="small-input" type="number"
-              placeholder={Messages.Interest[lang]}
-              value={this.state.bankInterest}
-              onChange={event => this.setState({bankInterest: event.target.value})}
-            />
-            <i className="fa fa-percent icon"></i>
           </div>
           <div className="checkbox-field">
             <div className="checkbox">
+              <label>{Messages.StopProfit[lang]}</label>          
+            </div>
+            <div className="slide-input">
               <MuiThemeProvider>
                 <Toggle style={styles.block}
                   onToggle={(event, isInputChecked) => this.setState({givesProfit: isInputChecked})}
@@ -200,13 +207,12 @@ class App extends Component {
                   trackSwitchedStyle={styles.trackSwitched}
                 />
               </MuiThemeProvider>
-              <label>{Messages.StopProfit[lang]}</label>          
+              <input className="small-input" type="number"
+                placeholder={Messages.ProfitMonth[lang]}
+                value={this.state.whenProfitIsPerMonth}
+                onChange={event => this.setState({whenProfitIsPerMonth: event.target.value})}
+              />
             </div>
-            <input className="small-input" type="number"
-              placeholder={Messages.ProfitMonth[lang]}
-              value={this.state.whenProfitIsPerMonth}
-              onChange={event => this.setState({whenProfitIsPerMonth: event.target.value})}
-            />
           </div>
         </div>
         <div className="graph-container">
