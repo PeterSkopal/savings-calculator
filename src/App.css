@@ -83,10 +83,11 @@ textarea:focus {
 
 .icon {
   position: absolute;
-  right: 20px;
-  top: 24px;
+  right: 23px;
   opacity: 0.2;
   font-size: 15px;
+  margin: 0;
+  padding: 0;
 }
 
 .graph-container {

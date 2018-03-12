@@ -3,12 +3,13 @@ import Messages from './language.json';
 import moment from 'moment';
 import _ from 'underscore';
 import { Bar } from 'react-chartjs-2';
+import FontAwesome from 'react-fontawesome';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Toggle from 'material-ui/Toggle';
 import './App.css';
 
 const script = document.currentScript;
-let lang =  'en';
+let lang =  'sv';
 if (script && script.hasAttribute('lan') && Messages.languages.includes(script.getAttribute('lan'))) {
   lang = script.getAttribute('lan');
 }
@@ -138,19 +139,25 @@ class App extends Component {
         <div className="input-container">
           <div className="input-field">
             <label>{Messages.Savings[lang]}</label>
-            <input type="number"
-              placeholder={Messages.Savings[lang]}
-              value={this.state.initialSavings}
-              onChange={event => this.setState({initialSavings: event.target.value})}
-            />
+            <div className="slide-input" style={{position: 'relative', margin: 0}}>
+              <input type="number"
+                placeholder={Messages.Savings[lang]}
+                value={this.state.initialSavings}
+                onChange={event => this.setState({initialSavings: event.target.value})}
+              />
+              <p className="icon">{Messages.Currency[lang]}</p>
+            </div>
           </div>
           <div className="input-field">
-            <label>{Messages.MonthlySavings[lang]}</label>          
-            <input type="number"
-              placeholder={Messages.MonthlySavings[lang]}
-              value={this.state.monthlySavings}
-              onChange={event => this.setState({monthlySavings: event.target.value})}
-            />
+            <label>{Messages.MonthlySavings[lang]}</label>
+            <div className="slide-input" style={{position: 'relative', margin: 0}}>
+              <input type="number"
+                placeholder={Messages.MonthlySavings[lang]}
+                value={this.state.monthlySavings}
+                onChange={event => this.setState({monthlySavings: event.target.value})}
+              />
+              <p className="icon">{Messages.Currency[lang]}</p>
+            </div>
           </div>
           <div className="input-field">
             <label>{Messages.AmountOfYears[lang]}</label>          
@@ -162,13 +169,13 @@ class App extends Component {
           </div>
           <div className="input-field">
             <label>{Messages.InterestQuery[lang]}</label>
-            <div style={{position: 'relative', margin: 0}}>
+            <div className="slide-input" style={{position: 'relative', margin: 0}}>
               <input className="small-input" type="number"
                 placeholder={Messages.Interest[lang]}
                 value={this.state.interest}
                 onChange={event => this.setState({interest: event.target.value})}
               />
-              <i className="fa fa-percent icon"></i>
+              <FontAwesome name='percent' className="icon"/>
             </div>
           </div>
           <div className="checkbox-field">
@@ -190,14 +197,14 @@ class App extends Component {
                 value={this.state.bankInterest}
                 onChange={event => this.setState({bankInterest: event.target.value})}
               />
-              <i className="fa fa-percent icon"></i>
+              <FontAwesome name='percent' className="icon"/>
             </div>
           </div>
           <div className="checkbox-field">
             <div className="checkbox">
               <label>{Messages.StopProfit[lang]}</label>          
             </div>
-            <div className="slide-input">
+            <div className="slide-input" style={{position: 'relative', margin: 0}}>
               <MuiThemeProvider>
                 <Toggle style={styles.block}
                   onToggle={(event, isInputChecked) => this.setState({givesProfit: isInputChecked})}
@@ -212,6 +219,7 @@ class App extends Component {
                 value={this.state.whenProfitIsPerMonth}
                 onChange={event => this.setState({whenProfitIsPerMonth: event.target.value})}
               />
+              <p className="icon">{Messages.Currency[lang]}</p>
             </div>
           </div>
         </div>

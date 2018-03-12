@@ -12,9 +12,13 @@
         "en": "Bank Growth",
         "sv": "Bank Tillväxt"
     },
+    "Currency": {
+        "en": "",
+        "sv": "kr"
+    },
     "EconomicalGrowth": {
-        "en": "Economical Growth",
-        "sv": "Ekonomisk Tillväxt"
+        "en": "Total Capital",
+        "sv": "Totalt Kapital"
     },
     "Interest": {
         "en": "Interest",
@@ -22,11 +26,11 @@
     },
     "InterestQuery": {
         "en": "Interest Expectation",
-        "sv": "Förväntad Ränta"
+        "sv": "Utveckling per År"
     },
     "MonthlySavings": {
         "en": "Monthly Investments",
-        "sv": "Månatliga Investeringar"
+        "sv": "Månadssparande"
     },
     "Profit": {
         "en": "Profit",
@@ -38,7 +42,7 @@
     },
     "Savings": {
         "en": "Initial Savings",
-        "sv": "Sparkapital"
+        "sv": "Startkapital"
     },
     "StopProfit": {
         "en": "Stop When Profit/Month is",
