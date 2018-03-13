@@ -9,7 +9,7 @@ import Toggle from 'material-ui/Toggle';
 import './App.css';
 
 const script = document.currentScript;
-let lang =  'sv';
+let lang =  'en';
 if (script && script.hasAttribute('lan') && Messages.languages.includes(script.getAttribute('lan'))) {
   lang = script.getAttribute('lan');
 }

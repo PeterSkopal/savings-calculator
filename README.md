@@ -1,5 +1,7 @@
 # Savings Calculator
 
+[![Build Status](https://travis-ci.org/PeterSkopal/savings-calculator.svg?branch=master)](https://travis-ci.org/PeterSkopal/savings-calculator)
+
 ## Run project locally
 ```js
 npm install && npm start
