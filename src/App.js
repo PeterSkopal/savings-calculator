@@ -174,7 +174,7 @@ class App extends Component {
                 value={this.state.year}
                 onChange={event => this.setState({year: event.target.value})}
               />
-              <p className="icon">{Messages.Years[lang]}</p>
+              <p className="icon">{Messages.YearLabel[lang]}</p>
             </div>
           </div>
           <div className="input-field">

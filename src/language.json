@@ -50,6 +50,10 @@
     },
     "Years": {
         "en": "Years",
+        "sv": "År"    
+    },
+    "YearLabel": {
+        "en": "",
         "sv": "år"    
     }
 }
