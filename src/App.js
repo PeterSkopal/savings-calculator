@@ -167,12 +167,15 @@ class App extends Component {
             </div>
           </div>
           <div className="input-field">
-            <label>{Messages.AmountOfYears[lang]}</label>          
-            <input className="small-input" type="number"
-              placeholder={Messages.Years[lang]}
-              value={this.state.year}
-              onChange={event => this.setState({year: event.target.value})}
-            />
+            <label>{Messages.AmountOfYears[lang]}</label>
+            <div className="slide-input" style={{position: 'relative', margin: 0}}>   
+              <input className="small-input" type="number"
+                placeholder={Messages.Years[lang]}
+                value={this.state.year}
+                onChange={event => this.setState({year: event.target.value})}
+              />
+              <p className="icon">{Messages.Years[lang]}</p>
+            </div>
           </div>
           <div className="input-field">
             <label>{Messages.InterestQuery[lang]}</label>

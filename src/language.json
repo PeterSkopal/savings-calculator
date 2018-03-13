@@ -10,7 +10,7 @@
     },
     "BankGrowth": {
         "en": "Bank Growth",
-        "sv": "Bank Tillväxt"
+        "sv": "Bankkonto"
     },
     "Currency": {
         "en": "",
@@ -50,6 +50,6 @@
     },
     "Years": {
         "en": "Years",
-        "sv": "År"    
+        "sv": "år"    
     }
 }
