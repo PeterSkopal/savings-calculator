@@ -34,15 +34,18 @@ const styles = {
 
 class App extends Component {
 
-  state = {
-    year: 10,
-    initialSavings: 1000,
-    interest: 7,
-    monthlySavings: 2500,
-    bankComparison: false,
-    bankInterest: 0.5,
-    givesProfit: false,
-    whenProfitIsPerMonth: 1000,
+  constructor(props) {
+    super(props);
+    this.state = {
+      year: 10,
+      initialSavings: 1000,
+      interest: 7,
+      monthlySavings: 2500,
+      bankComparison: false,
+      bankInterest: 0.5,
+      givesProfit: false,
+      whenProfitIsPerMonth: 1000,
+    };
   }
 
   chartData() {
@@ -100,10 +103,10 @@ class App extends Component {
       const bankInterest = this.state.bankInterest === '' ? 0 : parseFloat(this.state.bankInterest, 10);
       const profit = this.state.whenProfitIsPerMonth === '' ? 0 : parseFloat(this.state.whenProfitIsPerMonth, 10);
       
-      data.economicalGrowth.push( savings + this.state.monthlySavings * 12 )
+      data.economicalGrowth.push( savings + this.state.monthlySavings * 12 );
       
       if (this.state.bankComparison) {
-        data.bankGrowth.push( savings + this.state.monthlySavings * 12 )
+        data.bankGrowth.push( savings + this.state.monthlySavings * 12 );
       }
       if (this.state.givesProfit) {
         data.profit.push(0);
@@ -121,12 +124,16 @@ class App extends Component {
           
         } else {
           data.profit.push(0);
-          data.economicalGrowth.push(Math.round(((1 + (interest / 100)) * (data.economicalGrowth[i-1]+monthlySavings*12)) / 10) * 10);
+          data.economicalGrowth.push(
+            Math.round(((1 + (interest / 100)) * (data.economicalGrowth[i-1]+monthlySavings*12)) / 10) * 10
+          );
         }
         if (this.state.bankComparison && this.state.givesProfit && stopBankSaving) {
           data.bankGrowth.push(data.bankGrowth[i - 1]);
         } else {
-          data.bankGrowth.push(Math.round(((1 + bankInterest / 100) * (data.bankGrowth[i-1]+monthlySavings*12)) / 10) * 10);
+          data.bankGrowth.push(
+            Math.round(((1 + bankInterest / 100) * (data.bankGrowth[i-1]+monthlySavings*12)) / 10) * 10
+          );
         }
       }
     }
